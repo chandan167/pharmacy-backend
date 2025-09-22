@@ -10,7 +10,7 @@
 
 # Test binary, built with `go test -c`
 *.test
-
+logs/*
 # Code coverage profiles and other test artifacts
 *.out
 coverage.*
@@ -18,7 +18,7 @@ coverage.*
 profile.cov
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
+vendor/
 
 # Go workspace file
 go.work
@@ -27,6 +27,7 @@ go.work.sum
 # env file
 .env
 .env.development
+
 
 # Editor/IDE
 # .idea/
