@@ -1,0 +1,5 @@
+{"time":"2025-09-22T21:58:54.044088+05:30","level":"INFO","msg":"Hello","user":"chandan"}
+time=2025-09-22T21:59:50.245+05:30 level=INFO msg=Hello user=chandan
+{"time":"2025-09-22T22:02:41.155379+05:30","level":"INFO","msg":"Hello","user":"chandan"}
+{"time":"2025-09-22T22:06:41.180351+05:30","level":"INFO","msg":"setup Router"}
+{"time":"2025-09-22T22:07:25.927903+05:30","level":"INFO","msg":"setup Router"}
