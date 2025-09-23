@@ -1,11 +1,19 @@
 package controller
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/chandan167/pharmacy-backend/pkg/helper"
+	"github.com/chandan167/pharmacy-backend/service"
+	"github.com/gofiber/fiber/v2"
+)
 
-type UserController struct{}
+type UserController struct {
+	us *service.UserService
+}
 
-func NewUserController() *UserController {
-	return &UserController{}
+func NewUserController(userService *service.UserService) *UserController {
+	return &UserController{
+		us: userService,
+	}
 }
 
 func (uc *UserController) CreateUserHandler(ctx *fiber.Ctx) error {
@@ -15,8 +23,16 @@ func (uc *UserController) CreateUserHandler(ctx *fiber.Ctx) error {
 }
 
 func (uc *UserController) GetUsersHandler(ctx *fiber.Ctx) error {
+	pageParam, err := helper.GetPaginationSearchParam(ctx)
+	if err != nil {
+		return fiber.NewError(fiber.StatusBadRequest, err.Error())
+	}
+	userResult, err := uc.us.PaginateWithSearchUsers(pageParam)
+	if err != nil {
+		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
+	}
 	return ctx.JSON(fiber.Map{
-		"message": "user list",
+		"user": userResult,
 	})
 }
 
