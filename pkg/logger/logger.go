@@ -21,7 +21,7 @@ func Init(env string, filePath string) {
 
 		// File handler with log rotation
 		if filePath != "" {
-			fileHandler := slog.NewJSONHandler(&lumberjack.Logger{
+			fileHandler := slog.NewTextHandler(&lumberjack.Logger{
 				Filename:   filePath,
 				MaxSize:    10, // MB
 				MaxBackups: 3,

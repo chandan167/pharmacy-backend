@@ -49,3 +49,17 @@ func (us *UserService) PaginateWithSearchUsers(param *types.PaginationSearchPara
 		TotalPage: totalPage,
 	}, result.Error
 }
+
+func (us *UserService) DeleteUserById(id int) error {
+	result := us.db.Delete(&model.UserModel{}, id).Error
+	return result
+}
+
+func (us *UserService) GetUserById(id int) (*model.UserModel, error) {
+	var user model.UserModel
+	err := us.db.First(&user, id).Error
+	if err != nil {
+		return nil, err
+	}
+	return &user, err
+}
