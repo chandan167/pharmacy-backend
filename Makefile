@@ -1,2 +1,2 @@
 run:
-	@go run cmd/api/main.go --env=.env.development
+	@go run -race cmd/api/main.go --env=.env.development

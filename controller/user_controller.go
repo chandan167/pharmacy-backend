@@ -29,11 +29,11 @@ func (uc *UserController) CreateUserHandler(ctx *fiber.Ctx) error {
 func (uc *UserController) GetUsersHandler(ctx *fiber.Ctx) error {
 	pageParam, err := helper.GetPaginationSearchParam(ctx)
 	if err != nil {
-		return fiber.NewError(fiber.StatusBadRequest, err.Error())
+		return helper.BadRequestError(err.Error())
 	}
 	userResult, err := uc.us.PaginateWithSearchUsers(pageParam)
 	if err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
+		return helper.NewAppError(fiber.StatusInternalServerError, err.Error())
 	}
 	return ctx.JSON(fiber.Map{
 		"user": userResult,
@@ -43,14 +43,14 @@ func (uc *UserController) GetUsersHandler(ctx *fiber.Ctx) error {
 func (uc *UserController) GetUserHandler(ctx *fiber.Ctx) error {
 	id, err := strconv.Atoi(ctx.Params("id"))
 	if err != nil {
-		return fiber.NewError(fiber.StatusBadRequest, "invalid param id")
+		return helper.BadRequestError("invalid param id")
 	}
 	users, err := uc.us.GetUserById(id)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return fiber.NewError(fiber.StatusNotFound, "user not found")
+			return helper.NotFoundError("user not found")
 		}
-		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
+		return helper.NewAppError(fiber.StatusInternalServerError, err.Error())
 	}
 	return ctx.JSON(fiber.Map{
 		"message": "user detail",
@@ -67,7 +67,7 @@ func (uc *UserController) UpdateUserHandler(ctx *fiber.Ctx) error {
 func (uc *UserController) DeleteUserHandler(ctx *fiber.Ctx) error {
 	id, err := strconv.Atoi(ctx.Params("id"))
 	if err != nil {
-		return fiber.NewError(fiber.StatusBadRequest, "invalid param id")
+		return helper.BadRequestError("invalid param id")
 	}
 	uc.us.DeleteUserById(id)
 	return ctx.JSON(fiber.Map{

@@ -1,11 +1,11 @@
 package main
 
 import (
-	"errors"
 	"flag"
 	"log"
 	"os"
 
+	"github.com/chandan167/pharmacy-backend/pkg/helper"
 	"github.com/chandan167/pharmacy-backend/pkg/logger"
 	"github.com/chandan167/pharmacy-backend/router"
 	"github.com/gofiber/fiber/v2"
@@ -41,11 +41,19 @@ func init() {
 func errorHandler(ctx *fiber.Ctx, err error) error {
 	code := fiber.StatusInternalServerError
 	message := "inter server error"
-	var e *fiber.Error
-	if errors.As(err, &e) {
+	var validation_error any = nil
+
+	if e, ok := err.(*fiber.Error); ok {
 		code = e.Code
-		message = e.Message
+		message = e.Error()
 	}
+
+	if e, ok := err.(*helper.AppError); ok {
+		code = e.StatusCode
+		message = e.Error()
+		validation_error = e.ValidationError
+	}
+
 	reqId := ctx.Locals("requestid")
 
 	logger.Logger.Error("ERROR HANDLER",
@@ -54,14 +62,16 @@ func errorHandler(ctx *fiber.Ctx, err error) error {
 		"REQUEST_ID", reqId,
 		"METHOD", ctx.Method(),
 		"PATH", ctx.Path(),
+		"VALIDATION_ERROR", validation_error,
 	)
 
 	return ctx.Status(code).JSON(fiber.Map{
-		"success":    false,
-		"status":     code,
-		"message":    message,
-		"request_id": reqId,
-		"method":     ctx.Method(),
-		"path":       ctx.Path(),
+		"success":          false,
+		"status":           code,
+		"message":          message,
+		"request_id":       reqId,
+		"method":           ctx.Method(),
+		"path":             ctx.Path(),
+		"validation_error": validation_error,
 	})
 }
