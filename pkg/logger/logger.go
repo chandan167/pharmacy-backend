@@ -33,10 +33,11 @@ func Init(env string, filePath string) {
 
 		// Console handler
 		var consoleHandler slog.Handler
-		if env == "production" {
-			consoleHandler = slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelInfo})
-		} else {
+		if env == "development" {
+			// consoleHandler = slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelInfo})
 			consoleHandler = slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug})
+		} else {
+
 		}
 		handlers = append(handlers, consoleHandler)
 

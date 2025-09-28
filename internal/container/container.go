@@ -1,9 +1,9 @@
 package container
 
 import (
-	"github.com/chandan167/pharmacy-backend/controller"
-	"github.com/chandan167/pharmacy-backend/database"
-	"github.com/chandan167/pharmacy-backend/service"
+	"github.com/chandan167/pharmacy-backend/internal/controller"
+	"github.com/chandan167/pharmacy-backend/internal/database"
+	"github.com/chandan167/pharmacy-backend/internal/service"
 	"go.uber.org/dig"
 )
 

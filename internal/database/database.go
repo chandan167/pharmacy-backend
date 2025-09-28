@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/chandan167/pharmacy-backend/model"
+	"github.com/chandan167/pharmacy-backend/internal/model"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"

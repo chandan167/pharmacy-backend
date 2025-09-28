@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/chandan167/pharmacy-backend/model"
+	"github.com/chandan167/pharmacy-backend/internal/model"
+	"github.com/chandan167/pharmacy-backend/internal/types"
 	"github.com/chandan167/pharmacy-backend/pkg/helper"
-	"github.com/chandan167/pharmacy-backend/types"
 	"gorm.io/gorm"
 )
 

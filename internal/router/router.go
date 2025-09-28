@@ -1,8 +1,8 @@
 package router
 
 import (
-	"github.com/chandan167/pharmacy-backend/container"
-	"github.com/chandan167/pharmacy-backend/controller"
+	"github.com/chandan167/pharmacy-backend/internal/container"
+	"github.com/chandan167/pharmacy-backend/internal/controller"
 	"github.com/gofiber/fiber/v2"
 )
 

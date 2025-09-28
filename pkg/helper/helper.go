@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/chandan167/pharmacy-backend/types"
+	"github.com/chandan167/pharmacy-backend/internal/types"
 	"github.com/gofiber/fiber/v2"
 )
 

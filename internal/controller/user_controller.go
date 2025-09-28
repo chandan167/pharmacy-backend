@@ -4,8 +4,8 @@ import (
 	"errors"
 	"strconv"
 
+	"github.com/chandan167/pharmacy-backend/internal/service"
 	"github.com/chandan167/pharmacy-backend/pkg/helper"
-	"github.com/chandan167/pharmacy-backend/service"
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
 )
